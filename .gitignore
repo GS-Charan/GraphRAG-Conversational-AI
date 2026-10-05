@@ -1,0 +1,31 @@
+# Model weights (GBs — download separately, see README Models table)
+Models/
+*.gguf
+*.safetensors
+*.pth
+*.bin
+
+# Local runtimes and data (regenerated at runtime)
+voice_env/
+companion_data/
+chroma_db/
+data/
+vendor/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.cache/
+
+# Secrets / local config
+.streamlit/secrets.toml
+.env
+
+# Personal notes (never publish)
+docs/*.md

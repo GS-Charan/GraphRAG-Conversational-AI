@@ -1,0 +1,11 @@
+-e ./vendor/mem0
+fastembed
+huggingface-hub
+neo4j
+ollama
+ormsgpack
+sentence-transformers
+spacy
+streamlit
+torch
+transformers

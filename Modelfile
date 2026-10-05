@@ -1,0 +1,8 @@
+FROM ./Models/gemma-4-12b-it-uncensored-Q8_0.gguf
+
+PARAMETER temperature 0.7
+PARAMETER num_ctx 4096
+PARAMETER num_predict 256
+PARAMETER num_gpu 0
+
+SYSTEM """You are a private local AI companion. Be kind, direct, and helpful."""

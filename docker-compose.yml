@@ -1,0 +1,43 @@
+# GraphRAG Conversational AI — Neo4j in Docker.
+#
+# Prerequisites (one time, on Windows):
+#   1. Install WSL2:  wsl --install   (reboot if asked)
+#   2. Install Docker Desktop (winget install -e --id Docker.DockerDesktop)
+#      and make sure it is running in Linux-containers mode.
+#
+# Usage:
+#   Stop the native server first (it owns ports 7474/7687):
+#     Stop-Process -Name java  # only if it is the C:\Games\neo4j console
+#   docker compose up -d
+#   python scripts/migrate_sqlite_to_neo4j.py   # one-off, reseeds the 6 legacy facts
+#   # Browse the graph at http://localhost:7474 (user neo4j)
+#   docker compose logs -f neo4j               # watch startup
+#   docker compose down                         # stop (data persists in neo4j_data)
+#
+# No app code changes needed: same bolt URI, credentials, and database
+# as the native install (see companion/settings.py).
+services:
+  neo4j:
+    image: neo4j:5.26.0-community
+    container_name: companion-neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:-CompanionGraph01}
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_max__size=1G
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
