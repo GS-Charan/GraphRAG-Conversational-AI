@@ -59,7 +59,7 @@ The memory system is deliberately modeled on how human memory works — separate
      Suggested content: side-by-side mapping of brain regions to the
      stores in the table above (working / episodic / graph / profile).
 ============================================================ -->
-![Memory architecture mapped to human memory](docs/images/memory-brain-map.png)
+
 
 ---
 
@@ -154,7 +154,7 @@ sequenceDiagram
      Suggested capture: Neo4j Browser (http://localhost:7474) showing
      your Entity/RELATES graph, e.g. user —like→ anime.
 ============================================================ -->
-![Relationship graph in Neo4j Browser](docs/images/graph-nodes.png)
+
 
 ---
 
